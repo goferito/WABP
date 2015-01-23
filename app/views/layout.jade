@@ -1,0 +1,18 @@
+html
+  head
+    title WABP
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    .navbar.navbar-default(role='navigation')
+      .container
+        .navbar-header
+          a.navbar-brand(href='/') Logo
+        .navbar-collapse.collapse
+          ul#menu.nav.navbar-nav
+            li#menu_pizzas: a(href='/pizzas') pizzas
+            li: a(href='/test') Test Link
+
+
+    .container#content
+      block content

@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  a#newTracker.btn.btn-info(href='/burgers/new') New Track
+  br
+  br
+  h3 List of tracks
+  - if(!tracks || !tracks.length)
+    i No registered tracks
+  - else
+    table.table.table-striped.table-hover
+      tr
+        th Description
+        th Hook
+        th Redirection
+        th(colspan=2) Options
+      - each track in tracks
+        tr
+          td=track.description
+          td=track.hook
+          td=track.redirect
+          td
+            a.btn.btn-warning.btn-xs(href='/tracks/edit?id='+track._id) Edit
+            span &nbsp;
+            a.btn.btn-info.btn-xs(href='/reqs?id='+track._id) Reqs
+

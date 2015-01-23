@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h2 New Pizza
+
+  form(action='/pizza/new', method='post')
+    - if(pizza && pizza._id)
+      input(type='hidden',
+            name='_id',
+            value='#{pizza._id}')
+
+    input(type='text',
+          name='description',
+          value='#{pizza ? pizza.description : ""}'
+          placeholder='Description')
+    br
+    br
+
+    input(type='text',
+          name='cheese',
+          value='#{pizza ? pizza.cheese : ""}'
+          placeholder='cheese')
+
+    br
+    br
+
+    input(type='text',
+          name='border',
+          value='#{pizza ? pizza.border : ""}'
+          placeholder='border')
+    br
+    br
+
+    input(type='submit')
+

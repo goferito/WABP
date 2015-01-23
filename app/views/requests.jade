@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h3 Requests to #{lieferheld}
+  - if(!pizzas || !pizzas.length)
+    i No registered pizzas
+  - else
+    table.table.table-striped.table-hover
+      tr
+        th Time
+        th User
+        th Location
+      - each req in reqs
+        tr
+          td=req.ts
+          td=req.user
+          td=req.location
+
