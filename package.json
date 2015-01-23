@@ -2,7 +2,7 @@
   "name": "WABP",
   "version": "0.0.1",
   "description": "Express 4 Web App Boilerplate",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "mocha"
   },

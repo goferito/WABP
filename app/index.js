@@ -7,6 +7,7 @@ var express = require('express')
   
 
 var auth = require('./controllers/auth')
+  , pizzas = require('./controllers/pizzas')
   , reqs = require('./controllers/reqs')
   
 
@@ -44,6 +45,10 @@ app.get('/'
   , function(req, res){
     res.render('landing');
   });
+
+app.get('/pizzas'
+  , pizzas.loadLast
+  , pizzas.renderList);
 
 
 

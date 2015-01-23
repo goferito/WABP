@@ -1,12 +1,12 @@
 extends layout
 
 block content
-  a#newTracker.btn.btn-info(href='/burgers/new') New Track
+  a#new.btn.btn-info(href='/pizzas/new') New Pizza
   br
   br
-  h3 List of tracks
-  - if(!tracks || !tracks.length)
-    i No registered tracks
+  h3 List of pizzas
+  - if(!pizzas || !pizzas.length)
+    i No registered pizzas
   - else
     table.table.table-striped.table-hover
       tr
@@ -14,13 +14,13 @@ block content
         th Hook
         th Redirection
         th(colspan=2) Options
-      - each track in tracks
+      - each pizza in pizzas
         tr
-          td=track.description
-          td=track.hook
-          td=track.redirect
+          td=pizza.description
+          td=pizza.hook
+          td=pizza.redirect
           td
-            a.btn.btn-warning.btn-xs(href='/tracks/edit?id='+track._id) Edit
+            a.btn.btn-warning.btn-xs(href='/pizzas/edit?id='+pizza._id) Edit
             span &nbsp;
-            a.btn.btn-info.btn-xs(href='/reqs?id='+track._id) Reqs
+            a.btn.btn-info.btn-xs(href='/reqs?id='+pizza._id) Reqs
 
