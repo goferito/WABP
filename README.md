@@ -9,11 +9,20 @@ not in a fucking rush.
 2. Create the secrets.js from the example
 3. Remove the .git folder, and init a new repository for the new project
 4. Change the package.json repository info
-5. Install dependencies ```npm i```
-6. Run gulp tasks ```gulp```
+5. Install dependencies
+
+```npm install```
+
+6. Run gulp tasks
+
+```gulp```
+
 7. Check that it works on the browser
-8. Prepare the server to deploy with a git push: ``bash ops/install_git_deployment.sh <SSH HOST> <PROJECT NAME> <SERVICE PORT>``
-6. Change everything else
+8. Prepare the server to deploy with a git push:
+
+   ``bash ops/install_git_deployment.sh <SSH HOST> <PROJECT NAME> <SERVICE PORT>``
+
+9. Change everything else
 
 ### TODO
 * Make a proper working example with the pizzas and the requests
