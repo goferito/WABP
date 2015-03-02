@@ -63,31 +63,36 @@ var paths = {
 
 
 gulp.task('lintServer', function(){
-  gulp.src(paths.server)
-      .pipe(jshint(jshintServerOptions))
-      .pipe(jshint.reporter('default'));
+  return gulp.src(paths.server)
+             .pipe(jshint(jshintServerOptions))
+             .pipe(jshint.reporter('default'));
 });
 
 /**
  * Copy assets that need no processing
  */
 gulp.task('copy', function(){
-  gulp.src(paths.noChangeAssets, {base: 'app/public/'})
-      .pipe(gulp.dest('./build'));
+  return gulp.src(paths.noChangeAssets, {base: 'app/public/'})
+             .pipe(gulp.dest('./build'));
 });
 
 gulp.task('stylus', function(){
-  gulp.src(paths.styl)
-      .pipe(stylus())
-      .pipe(gulp.dest('build/css'));
+  return gulp.src(paths.styl)
+             .pipe(stylus())
+             .pipe(gulp.dest('build/css'));
 });
 
 gulp.task('publicjs', function(){
-  browserify('./app/public/js/app.js')
-    .transform(reactify)
-    .bundle()
-    .pipe(source('app.js'))
-    .pipe(gulp.dest('build/js'));
+  var b = browserify('./app/public/js/app.js')
+            .transform(reactify);
+
+  return b.bundle()
+          .on('error', function(err){
+            console.error(err.message);
+            this.emit('end');
+          })
+          .pipe(source('app.js'))
+          .pipe(gulp.dest('build/js'));
 });
 
 gulp.task('watch', function(){
@@ -98,10 +103,10 @@ gulp.task('watch', function(){
 });
 
 gulp.task('nodemon', function(){
-  nodemon({
+  return nodemon({
     script: 'index.js',
     env: {
-      PORT: 3000
+      PORT: process.env.PORT || 3000
     },
     watch: [
       'index.js',
