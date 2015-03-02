@@ -12,7 +12,13 @@ var auth = require('./controllers/auth')
   
 
 var app = express()
+  , http = require('http').Server(app)
+  , io = require('socket.io')(http)
   , PORT = process.env.PORT || 3000
+
+
+// Socket.io stuff
+require('./io')(io);
 
 
 // Set up express server
@@ -51,6 +57,6 @@ app.get('/pizzas'
 
 
 
-var server = app.listen(PORT, function(){
-  console.log('Listening on port', server.address().port);
+http.listen(PORT, function(){
+  console.log('Listening on port', PORT);
 });

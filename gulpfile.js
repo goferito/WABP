@@ -1,6 +1,9 @@
 var gulp = require('gulp')
   , jshint = require('gulp-jshint')
   , stylus = require('gulp-stylus')
+  , browserify = require('browserify')
+  , reactify = require('reactify')
+  , source = require('vinyl-source-stream')
   , nodemon = require('gulp-nodemon')
   , util = require('util')
   
@@ -41,6 +44,7 @@ var paths = {
   , 'app/config/**/*.js'
   , 'app/controllers/**/*.js'
   , 'app/helpers/**/*.js'
+  , 'app/io/**/*.js'
   , 'app/models/**/*.js'
   ]
 , publicjs: [
@@ -78,10 +82,19 @@ gulp.task('stylus', function(){
       .pipe(gulp.dest('build/css'));
 });
 
+gulp.task('publicjs', function(){
+  browserify('./app/public/js/app.js')
+    .transform(reactify)
+    .bundle()
+    .pipe(source('app.js'))
+    .pipe(gulp.dest('build/js'));
+});
+
 gulp.task('watch', function(){
   gulp.watch(paths.server, ['lintServer']);
   gulp.watch(paths.styl, ['stylus']);
   gulp.watch(paths.noChangeAssets, ['copy']);
+  gulp.watch(paths.publicjs, ['publicjs']);
 });
 
 gulp.task('nodemon', function(){
@@ -94,6 +107,7 @@ gulp.task('nodemon', function(){
       'index.js',
       'app/index.js',
       'app/controllers/',
+      'app/io/',
       'app/models/',
       'app/libs/',
       'app/config/',
@@ -108,6 +122,7 @@ gulp.task('nodemon', function(){
  */
 gulp.task('default', ['copy',
                       'stylus',
+                      'publicjs',
                       'lintServer',
                       'nodemon',
                       'watch']);
@@ -115,5 +130,5 @@ gulp.task('default', ['copy',
 /**
  * Task executed to deploy
  */
-gulp.task('deploy', ['copy', 'stylus']);
+gulp.task('deploy', ['copy', 'stylus', 'publicjs']);
 
