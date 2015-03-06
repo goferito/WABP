@@ -5,16 +5,16 @@ var Req = require('../models/Pizza')
 
 
 
-me.save = function(p){
-  p.something_else = 'extra cheese';
-  pizza.insert(p, function(){});
+me.save = function(r){
+  r.something_else = 'extra cheese';
+  Req.insert(r, function(){});
 };
 
 
 //TODO create a module with the generic functions,
 //     most of the times the code is pretty much the same
 me.load = function(req, res, next){
-  Pizza.getByName(req.pizza._id, function(err, pizzas){
+  Req.getByName(req.pizza._id, function(err, pizzas){
     if(err) return next(err);
     req.reqs = reqs;
     next();
